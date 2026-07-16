@@ -5,15 +5,17 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
+# Добавляем переменную окружения на уровень всего workflow
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # Обновлено до v4
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Обновлено до v4
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
