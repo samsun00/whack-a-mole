@@ -1,0 +1,43 @@
+# Сборка и зависимости
+
+dist/
+build/
+node_modules/
+coverage/
+
+# Конфиги
+
+_.config.js
+_.config.json
+.eslintrc.js
+webpack.config.js
+
+# Не JS файлы
+
+_.html
+_.css
+_.png
+_.jpg
+_.jpeg
+_.gif
+_.svg
+_.md
+_.json
+_.lock
+_.txt
+_.xml
+_.yml
+_.yaml
+
+# Папки с ресурсами
+
+src/img/
+src/**/\*.html
+src/**/_.css
+src/\*\*/_.png
+src/\*_/_.jpg
+
+# Все файлы в корне кроме src
+
+/_._
+!src/

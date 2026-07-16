@@ -1,0 +1,22 @@
+/* Только чтобы было видно ячейки */
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  gap: 5px;
+  margin: 20px;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #333;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goblin {
+  width: 80px;
+  height: 80px;
+}
