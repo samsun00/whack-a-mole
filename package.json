@@ -14,9 +14,7 @@
     "show:coverage": "live-server coverage/lcov-report",
     "preshow:dist": "npm run build",
     "show:dist": "live-server dist",
-    "registry:public": "bash scripts/use-public-registry.sh",
-    "registry:local": "bash scripts/use-local-registry.sh",
-    "registry:check": "npm config get registry"
+    "registry:public": "bash scripts/use-public-registry.sh"
   },
   "author": "Rysaev Damir <freepad@ya.ru>",
   "license": "MIT",
@@ -32,6 +30,7 @@
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.3",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^30.4.1",
     "style-loader": "^3.3.3",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
