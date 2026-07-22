@@ -5,22 +5,42 @@ import './style.css';
 import goblinImage from './img/goblin.png';
 
 // ============================================
+// КОНСТАНТЫ
+// ============================================
+
+const GRID_SIZE = 4; // Размер сетки 4x4
+const TOTAL_CELLS = GRID_SIZE * GRID_SIZE; // 16 ячеек
+const MOVE_INTERVAL = 1000; // Интервал перемещения в миллисекундах (1 секунда)
+
+// ============================================
 // ЛОГИКА ИГРЫ
 // ============================================
 
 // Получаем контейнер
 const board = document.getElementById('game-board');
+if (!board) {
+    throw new Error('Элемент с id "game-board" не найден в DOM');
+}
 
 // Функция создания поля
 export function createBoard() {
     board.innerHTML = '';
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < TOTAL_CELLS; i++) {
         const cell = document.createElement('div');
         cell.className = 'cell';
         cell.dataset.index = i;
-        board.appendChild(cell);
+        board.append(cell);
     }
-    return document.querySelectorAll('.cell');
+
+    const cells = document.querySelectorAll('.cell');
+    if (cells.length === 0) {
+        throw new Error('Не удалось создать ячейки игрового поля');
+    }
+    if (cells.length !== TOTAL_CELLS) {
+        throw new Error(`Ожидалось ${TOTAL_CELLS} ячеек, получено ${cells.length}`);
+    }
+
+    return cells;
 }
 
 // Функция создания гнома
@@ -56,7 +76,7 @@ export function placeGoblinRandomly(goblin, cells) {
     if (!cells || cells.length === 0) return -1;
 
     const index = Math.floor(Math.random() * cells.length);
-    cells[index].appendChild(goblin);
+    cells[index].append(goblin);
     return index;
 }
 
@@ -66,7 +86,7 @@ export function moveGoblin(goblin, cells, currentIndex) {
     if (!goblin) return -1;
 
     const newIndex = getRandomDifferentIndex(currentIndex, cells.length);
-    cells[newIndex].appendChild(goblin);
+    cells[newIndex].append(goblin);
     return newIndex;
 }
 
@@ -83,12 +103,15 @@ const goblin = createGoblin();
 // Размещаем гнома
 let currentIndex = placeGoblinRandomly(goblin, cells);
 
-// Запускаем перемещение каждую секунду
-setInterval(() => {
+// Запускаем перемещение
+const intervalId = setInterval(() => {
     currentIndex = moveGoblin(goblin, cells, currentIndex);
-}, 1000);
+}, MOVE_INTERVAL);
 
 // Очистка интервала при выгрузке страницы
 window.addEventListener('beforeunload', () => {
     // Можно сохранить intervalId и очистить
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
 });
